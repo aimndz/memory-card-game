@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Rick and Morty";
+  src: url("./assets/font/rick-and-morty.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Joystix";
+  src: url("./assets/font/joystix.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.text-stroke {
+  -webkit-text-stroke-width: 2px; /* Width of the stroke */
+  -webkit-text-stroke-color: #173239; /* Color of the stroke */
+}
