@@ -16,7 +16,7 @@ export default {
       },
       fontFamily: {
         home: ["Rick and Morty", "sans-serif"],
-        button: ["Joystix", "sans-serif"],
+        main: ["Joystix", "sans-serif"],
       },
     },
   },
