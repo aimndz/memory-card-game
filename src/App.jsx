@@ -3,11 +3,14 @@ import HomePage from "./pages/HomePage";
 import MainPage from "./pages/MainPage";
 import bgVideo from "./assets/video/bgVideo.mp4";
 import BackgroundVideo from "./components/BackgroundVideo";
+import getData from "./api.js";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
+  const [selectedLevel, setSelectedLevel] = useState(null);
 
-  const handleLevelClick = (difficulty) => {
+  const handleLevelClick = (level) => {
+    setSelectedLevel(level);
     setCurrentPage("main");
   };
 
@@ -19,7 +22,7 @@ function App() {
     <>
       {currentPage === "home" && <HomePage onLevelClick={handleLevelClick} />}
       {currentPage === "main" && (
-        <MainPage goBackToHomePage={goBackToHomePage} />
+        <MainPage goBackToHomePage={goBackToHomePage} level={selectedLevel} />
       )}
       <BackgroundVideo source={bgVideo} />
       <footer className="absolute z-30 bottom-0 left-0 w-full text-center py-4 text-white font-main">

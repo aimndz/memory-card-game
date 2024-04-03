@@ -18,6 +18,9 @@ export default {
         home: ["Rick and Morty", "sans-serif"],
         main: ["Joystix", "sans-serif"],
       },
+      height: {
+        main: "calc(100% - 180px)",
+      },
     },
   },
   plugins: [],
