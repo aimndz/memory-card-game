@@ -5,11 +5,29 @@ import Tilt from "react-parallax-tilt";
 
 export default function Card({ image, name, onClick, isFlipped }) {
   return (
-    <Tilt glareColor="#ffffff" glareEnable="true">
-      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-        <BackCard onClick={onClick} image={image} name={name} />
-        <FrontCard onClick={onClick} image={image} name={name} />
-      </ReactCardFlip>
-    </Tilt>
+    <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+      <div>
+        <Tilt
+          glareColor="#ffffff"
+          glareEnable="true"
+          glarePosition="all"
+          glareMaxOpacity="0.4"
+          glareBorderRadius="7px"
+        >
+          <FrontCard onClick={onClick} image={image} name={name} />
+        </Tilt>
+      </div>
+      <div>
+        <Tilt
+          glareColor="#ffffff"
+          glareEnable="true"
+          glarePosition="all"
+          glareMaxOpacity="0.6"
+          glareBorderRadius="7px"
+        >
+          <BackCard onClick={onClick} image={image} name={name} />
+        </Tilt>
+      </div>
+    </ReactCardFlip>
   );
 }
