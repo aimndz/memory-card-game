@@ -33,11 +33,24 @@ export default function MainPage({ level, goBackToHomePage }) {
   const handleClick = () => {
     setIsFlipped(isFlipped.map(() => true));
 
-    const timeoutId = setTimeout(() => {
+    setTimeout(() => {
       setIsFlipped(isFlipped.map(() => false));
-    }, 1000);
+      shuffle();
+    }, 1500);
+  };
 
-    return () => clearTimeout(timeoutId);
+  const shuffle = () => {
+    const shuffledCharacters = [...characters];
+
+    for (let i = shuffledCharacters.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledCharacters[i], shuffledCharacters[j]] = [
+        shuffledCharacters[j],
+        shuffledCharacters[i],
+      ];
+    }
+
+    setCharacters(shuffledCharacters);
   };
 
   return (
@@ -51,7 +64,7 @@ export default function MainPage({ level, goBackToHomePage }) {
             onClick={goBackToHomePage}
           />
         </div>
-        <div className="flex flex-col justify-center text-white font-bold font-main">
+        <div className="flex flex-col justify-center text-white font-bold font-main drop-shadow-customShadow">
           <p>
             Score: <span>1</span>
           </p>
@@ -60,7 +73,10 @@ export default function MainPage({ level, goBackToHomePage }) {
           </p>
         </div>
       </header>
-      <main className="flex justify-center items-center h-main m-5">
+      <main className="flex justify-center items-center h-main m-5 flex-col gap-8">
+        <p className="text-white font-main text-lg drop-shadow-customShadow">
+          Avoid clicking the same card twice!!
+        </p>
         <section className="flex gap-5 justify-center flex-wrap">
           {characters.map((character, index) => (
             <Card
