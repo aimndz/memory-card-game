@@ -5,10 +5,15 @@ import getData from "../api";
 import { useState, useEffect } from "react";
 import Card from "../components/Card";
 import Tilt from "react-parallax-tilt";
+import GameOver from "../components/GameOver";
 
 export default function MainPage({ level, goBackToHomePage }) {
   const [characters, setCharacters] = useState([]);
   const [isFlipped, setIsFlipped] = useState([]);
+  const [selectedCharacters, setSelectedCharacters] = useState([]);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [result, setResult] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +35,34 @@ export default function MainPage({ level, goBackToHomePage }) {
     fetchData();
   }, [level]);
 
-  const handleClick = () => {
+  useEffect(() => {
+    if (characters.length > 0 && currentScore === characters.length) {
+      setResult("win");
+      setIsGameOver(true);
+    }
+  }, [currentScore, characters.length]);
+
+  const restartGame = () => {
+    setCharacters([]);
+    setIsFlipped([]);
+    setSelectedCharacters([]);
+    setCurrentScore(0);
+    setIsGameOver(false);
+    setResult("");
+  };
+
+  const handleClick = (key) => {
+    if (selectedCharacters.includes(key)) {
+      setResult("lose");
+      setIsGameOver(true);
+    } else {
+      setSelectedCharacters((prevSelectedCharacters) => [
+        ...prevSelectedCharacters,
+        key,
+      ]);
+      setCurrentScore(currentScore + 1);
+    }
+
     setIsFlipped(isFlipped.map(() => true));
 
     setTimeout(() => {
@@ -66,31 +98,36 @@ export default function MainPage({ level, goBackToHomePage }) {
         </div>
         <div className="flex flex-col justify-center text-white font-bold font-main drop-shadow-customShadow">
           <p>
-            Score: <span>1</span>
+            Score: <span>{currentScore}</span>
           </p>
           <p>
             High Score: <span>1</span>
           </p>
         </div>
       </header>
-      <main className="flex justify-center items-center h-main m-5 flex-col gap-8">
-        <p className="text-white font-main text-lg drop-shadow-customShadow">
-          Avoid clicking the same card twice!!
-        </p>
-        <section className="flex gap-5 justify-center flex-wrap">
-          {characters.map((character, index) => (
-            <Card
-              key={character.id}
-              image={character.image}
-              name={character.name}
-              onClick={() => {
-                handleClick();
-              }}
-              isFlipped={isFlipped[index]}
-            />
-          ))}
-        </section>
-      </main>
+
+      {isGameOver ? (
+        <GameOver result={result} restartGame={restartGame} />
+      ) : (
+        <main className="flex justify-center items-center h-main m-5 flex-col gap-8">
+          <p className="text-white font-main text-lg drop-shadow-customShadow">
+            Avoid clicking the same card twice!!!
+          </p>
+          <section className="flex gap-5 justify-center flex-wrap">
+            {characters.map((character, index) => (
+              <Card
+                key={character.id}
+                image={character.image}
+                name={character.name}
+                onClick={() => {
+                  handleClick(character.id);
+                }}
+                isFlipped={isFlipped[index]}
+              />
+            ))}
+          </section>
+        </main>
+      )}
     </section>
   );
 }
