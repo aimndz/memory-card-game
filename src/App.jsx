@@ -3,7 +3,6 @@ import HomePage from "./pages/HomePage";
 import MainPage from "./pages/MainPage";
 import bgVideo from "./assets/video/bgVideo.mp4";
 import BackgroundVideo from "./components/BackgroundVideo";
-import getData from "./api.js";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
