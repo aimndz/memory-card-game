@@ -14,6 +14,17 @@ export default function MainPage({ level, goBackToHomePage }) {
   const [currentScore, setCurrentScore] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
   const [result, setResult] = useState("");
+  const [highScore, setHighScore] = useState(() => {
+    const storedHighScore = localStorage.getItem("highScore");
+    return storedHighScore ? parseInt(storedHighScore, 10) : 0;
+  });
+
+  useEffect(() => {
+    if (currentScore > highScore) {
+      setHighScore(currentScore);
+      localStorage.setItem("highScore", currentScore.toString());
+    }
+  }, [currentScore, highScore]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -100,7 +111,7 @@ export default function MainPage({ level, goBackToHomePage }) {
             Score: <span>{currentScore}</span>
           </p>
           <p>
-            High Score: <span>1</span>
+            High Score: <span>{highScore}</span>
           </p>
         </div>
       </header>
