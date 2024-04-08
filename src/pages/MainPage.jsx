@@ -43,7 +43,6 @@ export default function MainPage({ level, goBackToHomePage }) {
   }, [currentScore, characters.length]);
 
   const restartGame = () => {
-    setCharacters([]);
     setIsFlipped([]);
     setSelectedCharacters([]);
     setCurrentScore(0);
