@@ -3,7 +3,7 @@ import frontCardImage from "../assets/image/card-front.png";
 export default function FrontCard({ image, name, onClick }) {
   return (
     <section
-      className="max-w-60 relative rounded-md overflow-hidden drop-shadow-customShadow cursor-pointer"
+      className="max-w-60  relative rounded-md overflow-hidden drop-shadow-customShadow cursor-pointer"
       onClick={onClick}
     >
       <div>

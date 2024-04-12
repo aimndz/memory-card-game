@@ -23,10 +23,11 @@ function App() {
       {currentPage === "main" && (
         <MainPage goBackToHomePage={goBackToHomePage} level={selectedLevel} />
       )}
-      <BackgroundVideo source={bgVideo} />
-      <footer className="absolute z-30 bottom-0 left-0 w-full text-center py-4 text-white font-main">
+      <footer className="absolute z-30 bottom-0 left-0 w-full text-center py-4 text-white font-main footer-blur">
         © Amiel Ian Mendoza 2024
       </footer>
+
+      <BackgroundVideo source={bgVideo} />
     </>
   );
 }

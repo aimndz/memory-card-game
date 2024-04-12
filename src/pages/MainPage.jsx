@@ -96,48 +96,49 @@ export default function MainPage({ level, goBackToHomePage }) {
   };
 
   return (
-    <section className="absolute z-30 top-0 left-0 right-0 max-w-7xl mx-auto h-full ">
-      <header className="flex justify-between m-5">
-        <div>
-          <img
-            src={logo}
-            alt="logo"
-            className="drop-shadow-customShadow max-w-52 cursor-pointer"
-            onClick={goBackToHomePage}
-          />
-        </div>
-        <div className="flex flex-col justify-center text-white font-bold font-main drop-shadow-customShadow">
-          <p>
-            Score: <span>{currentScore}</span>
-          </p>
-          <p>
-            High Score: <span>{highScore}</span>
-          </p>
-        </div>
-      </header>
-
-      {isGameOver ? (
-        <GameOver result={result} restartGame={restartGame} />
-      ) : (
-        <main className="flex justify-center items-center h-main m-5 flex-col gap-8">
-          <p className="text-white font-main text-lg drop-shadow-customShadow">
-            Avoid clicking the same card twice!!!
-          </p>
-          <section className="flex gap-5 justify-center flex-wrap">
-            {characters.map((character, index) => (
-              <Card
-                key={character.id}
-                image={character.image}
-                name={character.name}
-                onClick={() => {
-                  handleClick(character.id);
-                }}
-                isFlipped={isFlipped[index]}
-              />
-            ))}
-          </section>
-        </main>
-      )}
+    <section className="absolute z-30 inset-0 max-w-7xl mx-auto">
+      <div className="overflow-y-auto h-full">
+        <header className="flex flex-col sm:flex-row m-5 justify-between items-center sm:items-start">
+          <div>
+            <img
+              src={logo}
+              alt="logo"
+              className="drop-shadow-customShadow max-w-52 cursor-pointer"
+              onClick={goBackToHomePage}
+            />
+          </div>
+          <div className="flex flex-col justify-center text-white font-bold font-main drop-shadow-customShadow mt-5 sm:mt-0">
+            <p className="text-center">
+              Score: <span>{currentScore}</span>
+            </p>
+            <p className="text-center">
+              High Score: <span>{highScore}</span>
+            </p>
+          </div>
+        </header>
+        {isGameOver ? (
+          <GameOver result={result} restartGame={restartGame} />
+        ) : (
+          <main className="flex justify-center items-center m-5 flex-col gap-8">
+            <p className="text-white font-main text-lg drop-shadow-customShadow text-center">
+              Avoid clicking the same card twice!!!
+            </p>
+            <section className="flex gap-5 justify-center flex-wrap">
+              {characters.map((character, index) => (
+                <Card
+                  key={character.id}
+                  image={character.image}
+                  name={character.name}
+                  onClick={() => {
+                    handleClick(character.id);
+                  }}
+                  isFlipped={isFlipped[index]}
+                />
+              ))}
+            </section>
+          </main>
+        )}
+      </div>
     </section>
   );
 }
