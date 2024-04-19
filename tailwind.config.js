@@ -19,7 +19,10 @@ export default {
         main: ["Joystix", "sans-serif"],
       },
       height: {
-        main: "calc(100% - 180px)",
+        main: "calc(100vh - 180px)",
+      },
+      screens: {
+        main: "1060px",
       },
     },
   },

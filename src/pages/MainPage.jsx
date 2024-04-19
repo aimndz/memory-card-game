@@ -119,7 +119,7 @@ export default function MainPage({ level, goBackToHomePage }) {
         {isGameOver ? (
           <GameOver result={result} restartGame={restartGame} />
         ) : (
-          <main className="flex justify-center items-center m-5 flex-col gap-8">
+          <main className="flex justify-center items-center m-5 flex-col gap-8 main:h-main">
             <p className="text-white font-main text-lg drop-shadow-customShadow text-center">
               Avoid clicking the same card twice!!!
             </p>
